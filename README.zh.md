@@ -1,109 +1,72 @@
-# youtube-vers-agent
+<h1 align="center">
+  <img src="https://cdn.simpleicons.org/youtube/FF0000" width="72" alt="YouTube" /> youtube-vers-agent
+</h1>
 
-一种 Claude Code 技能，通过双源验证（本地 Claude + Gemini）和规格交叉验证将 YouTube 教程转换为 Claude Code 技能。
+<p align="center"><strong>把 YouTube 教程变成清晰、经过核实的 Claude Code 技能。</strong></p>
 
-## 描述
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-2ea44f?style=flat" alt="MIT License" /></a>
+  <a href="https://github.com/Zero-Piege/youtube-vers-agent/stargazers"><img src="https://img.shields.io/github/stars/Zero-Piege/youtube-vers-agent?style=flat&logo=github" alt="GitHub stars" /></a>
+  <a href=".claude/skills/youtube-vers-agent/SKILL.md"><img src="https://img.shields.io/badge/Claude%20Code-skill-cb785c?style=flat&logo=anthropic&logoColor=white" alt="Claude Code skill" /></a>
+</p>
 
-此技能通过以下方式将 YouTube 教程内容转换为结构化的 Claude Code 技能：
-1. 从视频转录中提取关键概念和程序
-2. 通过双源验证（视频 + 文档）验证信息
-3. 创建符合 Claude Code 约定的正确格式的 SKILL.md 文件
-4. 通过交叉参考确保准确性和完整性
+<p align="center">
+  <a href="README.md">🇬🇧 English</a> · <a href="README.zh.md">🇨🇳 中文</a> · <a href="README.zh-TW.md">🇹🇼 繁體中文</a> · <a href="README.ja.md">🇯🇵 日本語</a> · <a href="README.pt.md">🇵🇹 Português</a> · <a href="README.pt-BR.md">🇧🇷 Português (Brasil)</a> · <a href="README.ko.md">🇰🇷 한국어</a><br />
+  <a href="README.es.md">🇪🇸 Español</a> · <a href="README.de.md">🇩🇪 Deutsch</a> · <a href="README.fr.md">🇫🇷 Français</a> · <a href="README.he.md">🇮🇱 עברית</a> · <a href="README.ar.md">🇸🇦 العربية</a> · <a href="README.ru.md">🇷🇺 Русский</a> · <a href="README.pl.md">🇵🇱 Polski</a><br />
+  <a href="README.cs.md">🇨🇿 Čeština</a> · <a href="README.nl.md">🇳🇱 Nederlands</a> · <a href="README.tr.md">🇹🇷 Türkçe</a> · <a href="README.uk.md">🇺🇦 Українська</a> · <a href="README.vi.md">🇻🇳 Tiếng Việt</a> · <a href="README.tl.md">🇵🇭 Tagalog</a> · <a href="README.id.md">🇮🇩 Bahasa Indonesia</a><br />
+  <a href="README.th.md">🇹🇭 ไทย</a> · <a href="README.hi.md">🇮🇳 हिन्दी</a> · <a href="README.bn.md">🇧🇩 বাংলা</a> · <a href="README.ur.md">🇵🇰 اردو</a> · <a href="README.ro.md">🇷🇴 Română</a> · <a href="README.sv.md">🇸🇪 Svenska</a> · <a href="README.it.md">🇮🇹 Italiano</a><br />
+  <a href="README.el.md">🇬🇷 Ελληνικά</a> · <a href="README.hu.md">🇭🇺 Magyar</a> · <a href="README.fi.md">🇫🇮 Suomi</a> · <a href="README.da.md">🇩🇰 Dansk</a> · <a href="README.no.md">🇳🇴 Norsk</a>
+</p>
 
-## 何时使用
+---
 
-在以下情况下使用此技能：
-- 将教育性 YouTube 内容转换为可重用的 Claude Code 技能
-- 基于关于开发工具、框架或方法论的教学视频创建技能
-- 通过与官方文档核对来确保技能的准确性
-- 从视频学习资源构建验证过的技能库
+提供 YouTube 链接和目标后，此技能会分别用 Claude 与 Gemini 分析视频，将结果整理到 notes/SPEC.md，再构建并验证可复用的 Claude Code 技能。Gemini 可选；无法使用时会注明结果仅来自单一来源。
 
-## 技能工作流程
+## 工作流程
 
-### 1. 视频分析阶段
-- 使用 watch 技能处理 YouTube 视频以提取转录和关键帧
-- 识别视频中呈现的主要主题、程序和代码示例
-- 构建学习目标和成果
+1. **明确需求** — 确认要从视频中提取什么，以及要构建什么。视频超过 20 分钟时，可指定重点片段。
+2. **Claude 分析** — 使用 watch:watch 的本地引擎，将六部分构建说明保存到 notes/lecture-claude.md。
+3. **Gemini 独立分析** — 在不提供 Claude 笔记的情况下重复分析两次，并将两份结果保存到 notes/lecture-gemini.md。Gemini 不可用时，继续使用 Claude，并标记为单一来源。
+4. **交叉核对** — 在 notes/SPEC.md 中将每项标记为 CONFIRMED、UNE SOURCE 或 DÉSACCORD。检查视频画面以解决分歧，并保留准确的命令、包名、设置和错误信息。
+5. **构建并验证** — 将说明交给 skill-creator 生成技能，再用真实场景运行一次。
 
-### 2. 双源验证
-- 对于每个关键概念/程序，使用 context7-mcp 或 find-docs 技能咨询官方文档
-- 将视频内容与权威来源交叉参照
-- 注意任何差异或版本差异
-- 验证代码示例按演示方式工作
+## 所需条件
 
-### 3. 技能创建
-- 生成符合 Claude Code 约定的正确格式的 SKILL.md 文件
-- 包含清晰的描述、使用指南和逐步工作流程
-- 引用用于验证的视频来源和文档来源
-- 添加基于验证程序的适当工具推荐
-
-### 4. 质量保证
-- 测试提及的代码示例或程序
-- 验证技能是否遵循 Claude Code 技能格式标准
-- 确保技能提供可操作且可验证的指导
-
-## 输出
-
-在适当的 .claude/skills/ 目录中生成一个完整的 SKILL.md 文件，该文件：
-- 清晰定义技能的目的和适用性
-- 提供特定的使用指南
-- 概述可验证的工作流程
-- 引用用于双源验证的来源
-- 遵循 Claude Code 技能约定
-
-## 所需工具
-
-- watch：用于处理 YouTube 视频内容
-- context7-mcp 或 find-docs：用于双源验证相对于官方文档
-- Bash：用于文件操作和技能创建
+- Claude Code
+- 用于分析 YouTube 视频的 watch:watch 技能
+- 用于构建结果的 skill-creator 技能
+- Gemini（可选；工作流程支持仅使用 Claude）
 
 ## 安装
 
-1. 克隆此仓库：
-   ```bash
-   git clone https://github.com/Zero-Piege/youtube-vers-agent
-   ```
+```bash
+git clone https://github.com/Zero-Piege/youtube-vers-agent.git
+cd youtube-vers-agent
+cp -r .claude/skills/youtube-vers-agent ~/.claude/skills/
+```
 
-2. 将技能复制到您的 Claude Code 技能目录：
-   ```bash
-   cp -r .claude/skills/youtube-vers-agent ~/.claude/skills/
-   ```
-
-3. 重新加载插件：
-   ```bash
-   /reload-plugins
-   ```
+然后在 Claude Code 中运行 /reload-plugins 重新加载插件。
 
 ## 使用
 
-安装后，您可以通过提供 YouTube URL 和指定要构建的内容来使用此技能：
-
-```
-/youtube-vers-agent [YouTube URL] [要提取的内容] [要构建的内容]
+```text
+/youtube-vers-agent https://youtu.be/VIDEO_ID "整个项目" "一个 Claude Code 技能"
 ```
 
-示例：
-```
-/youtube-vers-agent https://youtu.be/zke3bTtvmLo 整个项目 一项 Claude Code 技能
-```
+## 生成的文件
 
-## 使用示例
+- `notes/lecture-claude.md` — Claude 的六部分视频分析
+- `notes/lecture-gemini.md` — Gemini 的两次独立分析（如可用）
+- `notes/SPEC.md` — 交叉核对后的说明和待解决问题
+- 在所选输出目录中生成的技能
 
-将关于创建 React 组件的 YouTube 教程转换为 Claude Code 技能：
-1. 使用 watch 技能提取视频转录和关键点
-2. 使用 context7-mcp 将 React 组件创建模式与官方 React 文档进行核对
-3. 创建包含在 Claude Code 中创建 React 组件的验证程序的 SKILL.md
-4. 包含对所使用的 YouTube 教程和 React 文档的引用
+## 仓库结构
 
-## 验证标准
-
-所有创建的技能必须：
-- 引用至少两个独立来源（视频 + 文档）
-- 包含具体且可操作的步骤
-- 提供清晰的使用指南
-- 遵循既定的 Claude Code 技能格式
-- 包含可测试的可验证程序
+- `README.md` — 英文项目主页
+- `README.<locale>.md` — 按语言代码命名的翻译页面
+- `SKILL.md` — 仓库中的技能源文件副本
+- `.claude/skills/youtube-vers-agent/SKILL.md` — Claude Code 项目技能路径中的安装副本；与根目录副本保持同步
 
 ## 许可证
 
-MIT 许可证 - 请参阅 [LICENSE](LICENSE) 文件了解详细信息。
+本项目采用 MIT 许可证，详见 LICENSE。

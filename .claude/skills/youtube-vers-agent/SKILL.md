@@ -11,7 +11,7 @@ When a user provides a YouTube link and asks to "build this", "make it into a sk
 
 3. **Gemini's reading**: Use /watch:watch [link] --engine gemini, same six-part request, twice, without showing Claude's specification. Record responses verbatim in notes/lecture-gemini.md.
 
-4. **SPEC.md creation**: Each line gets labeled as CONFIRMÉ, UNE SOURCE, or DÉSACCORD. Resolve disagreements by examining images with --timestamps. Remove timestamps, durations, and approximate numbers; keep exact commands, package names, settings, and error messages; end with OPEN QUESTIONS list.
+4. **SPEC.md creation**: Each line gets labeled as CONFIRMED, UNE SOURCE, or DÉSACCORD. Resolve disagreements by examining images with --timestamps. Remove timestamps, durations, and approximate numbers; keep exact commands, package names, settings, and error messages; end with OPEN QUESTIONS list.
 
 5. **Construction**: Provide SPEC.md to skill-creator, specifying that the specification comes from a video. Launch the new skill once on a real case and fix what breaks.
 

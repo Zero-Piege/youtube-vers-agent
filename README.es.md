@@ -1,109 +1,72 @@
-# youtube-vers-agent
+<h1 align="center">
+  <img src="https://cdn.simpleicons.org/youtube/FF0000" width="72" alt="YouTube" /> youtube-vers-agent
+</h1>
 
-Una habilidad de Claude Code que transforma tutoriales de YouTube en habilidades de Claude Code mediante verificación dual-fuente (Claude local + Gemini) y cruzamiento de especificaciones.
+<p align="center"><strong>Convierte tutoriales de YouTube en skills claras y verificadas para Claude Code.</strong></p>
 
-## Descripción
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-2ea44f?style=flat" alt="MIT License" /></a>
+  <a href="https://github.com/Zero-Piege/youtube-vers-agent/stargazers"><img src="https://img.shields.io/github/stars/Zero-Piege/youtube-vers-agent?style=flat&logo=github" alt="GitHub stars" /></a>
+  <a href=".claude/skills/youtube-vers-agent/SKILL.md"><img src="https://img.shields.io/badge/Claude%20Code-skill-cb785c?style=flat&logo=anthropic&logoColor=white" alt="Claude Code skill" /></a>
+</p>
 
-Esta habilidad convierte el contenido de tutoriales de YouTube en habilidades de Claude Code estructuradas mediante:
-1. Extraer conceptos clave y procedimientos de las transcripciones de video
-2. Verificar información a través de validación dual-fuente (video + documentación)
-3. Crear archivos SKILL.md correctamente formateados siguiendo las convenciones de Claude Code
-4. Garantizar precisión y completitud mediante referencias cruzadas
+<p align="center">
+  <a href="README.md">🇬🇧 English</a> · <a href="README.zh.md">🇨🇳 中文</a> · <a href="README.zh-TW.md">🇹🇼 繁體中文</a> · <a href="README.ja.md">🇯🇵 日本語</a> · <a href="README.pt.md">🇵🇹 Português</a> · <a href="README.pt-BR.md">🇧🇷 Português (Brasil)</a> · <a href="README.ko.md">🇰🇷 한국어</a><br />
+  <a href="README.es.md">🇪🇸 Español</a> · <a href="README.de.md">🇩🇪 Deutsch</a> · <a href="README.fr.md">🇫🇷 Français</a> · <a href="README.he.md">🇮🇱 עברית</a> · <a href="README.ar.md">🇸🇦 العربية</a> · <a href="README.ru.md">🇷🇺 Русский</a> · <a href="README.pl.md">🇵🇱 Polski</a><br />
+  <a href="README.cs.md">🇨🇿 Čeština</a> · <a href="README.nl.md">🇳🇱 Nederlands</a> · <a href="README.tr.md">🇹🇷 Türkçe</a> · <a href="README.uk.md">🇺🇦 Українська</a> · <a href="README.vi.md">🇻🇳 Tiếng Việt</a> · <a href="README.tl.md">🇵🇭 Tagalog</a> · <a href="README.id.md">🇮🇩 Bahasa Indonesia</a><br />
+  <a href="README.th.md">🇹🇭 ไทย</a> · <a href="README.hi.md">🇮🇳 हिन्दी</a> · <a href="README.bn.md">🇧🇩 বাংলা</a> · <a href="README.ur.md">🇵🇰 اردو</a> · <a href="README.ro.md">🇷🇴 Română</a> · <a href="README.sv.md">🇸🇪 Svenska</a> · <a href="README.it.md">🇮🇹 Italiano</a><br />
+  <a href="README.el.md">🇬🇷 Ελληνικά</a> · <a href="README.hu.md">🇭🇺 Magyar</a> · <a href="README.fi.md">🇫🇮 Suomi</a> · <a href="README.da.md">🇩🇰 Dansk</a> · <a href="README.no.md">🇳🇴 Norsk</a>
+</p>
 
-## Cuándo usar
+---
 
-Utiliza esta habilidad cuando deseas:
-- Convertir contenido educativo de YouTube en habilidades de Claude Code reutilizables
-- Crear habilidades basadas en videos tutoriales sobre herramientas de desarrollo, frameworks o metodologías
-- Garantizar la precisión de las habilidades mediante verificación contra documentación oficial
-- Construir una biblioteca de habilidades verificadas a partir de recursos de aprendizaje en video
+Proporciona un enlace de YouTube y un objetivo. La skill analiza el vídeo de forma independiente con Claude y Gemini, reúne los resultados en notes/SPEC.md y crea y valida una skill reutilizable para Claude Code. Gemini es opcional; si no está disponible, el resultado se marca como de una sola fuente.
 
-## Flujo de la habilidad
+## Cómo funciona
 
-### 1. Fase de análisis de video
-- Procesar video de YouTube usando la habilidad watch para extraer transcripción y fotogramas clave
-- Identificar temas principales, procedimientos y ejemplos de código presentados
-- Estructurar objetivos y resultados de aprendizaje
+1. **Definir la petición** — aclarar qué extraer del vídeo y qué construir. En vídeos de más de 20 minutos, se puede elegir un segmento.
+2. **Análisis con Claude** — usar el motor local de watch:watch y guardar la especificación de seis partes en notes/lecture-claude.md.
+3. **Análisis independiente con Gemini** — repetir el análisis dos veces sin mostrar las notas de Claude y guardar ambas respuestas en notes/lecture-gemini.md. Si Gemini no está disponible, continuar solo con Claude y marcar el resultado como de una sola fuente.
+4. **Contrastar los resultados** — etiquetar cada elemento de notes/SPEC.md como CONFIRMED, UNE SOURCE o DÉSACCORD. Revisar fotogramas para resolver desacuerdos y conservar comandos, nombres de paquetes, ajustes y mensajes de error exactos.
+5. **Crear y validar** — entregar la especificación a skill-creator, generar la skill y ejecutarla en un caso real.
 
-### 2. Verificación dual-fuente
-- Para cada concepto/procedimiento clave, consultar documentación oficial usando habilidades context7-mcp o find-docs
-- Cruzar contenido de video con fuentes autoritativas
-- Anotar cualquier discrepancia o diferencia de versión
-- Verificar que los ejemplos de código funcionen como se demostró
+## Requisitos
 
-### 3. Creación de habilidad
-- Generar archivo SKILL.md correctamente formateado siguiendo convenciones de Claude Code
-- Incluir descripción clara, directrices de uso y flujo de trabajo paso a paso
-- Referenciar tanto la fuente de video como las fuentes de documentación usadas para verificación
-- Añadir recomendaciones de herramientas apropiadas basadas en procedimientos verificados
-
-### 4. Aseguramiento de calidad
-- Probar ejemplos de código o procedimientos mencionados
-- Validar que la habilidad siga estándares de formato de habilidades de Claude Code
-- Asegurar que la habilidad proporcione orientación accionable y verificable
-
-## Salida
-
-Produce un archivo SKILL.md completo en el directorio apropiado .claude/skills/ que:
-- Define claramente el propósito y aplicabilidad de la habilidad
-- Proporciona directrices de uso específicas
-- Describe un flujo de trabajo verificable
-- Referencia las fuentes usadas para verificación dual-fuente
-- Sigue las convenciones de habilidades de Claude Code
-
-## Herramientas requeridas
-
-- watch: Para procesar contenido de videos de YouTube
-- context7-mcp o find-docs: Para verificación dual-fuente contra documentación oficial
-- Bash: Para operaciones de archivos y creación de habilidades
+- Claude Code
+- La skill watch:watch para analizar vídeos de YouTube
+- La skill skill-creator para crear el resultado
+- Acceso a Gemini (opcional; el flujo permite continuar solo con Claude)
 
 ## Instalación
 
-1. Clona este repositorio:
-   ```bash
-   git clone https://github.com/Zero-Piege/youtube-vers-agent
-   ```
+```bash
+git clone https://github.com/Zero-Piege/youtube-vers-agent.git
+cd youtube-vers-agent
+cp -r .claude/skills/youtube-vers-agent ~/.claude/skills/
+```
 
-2. Copia la habilidad a tu directorio de habilidades de Claude Code:
-   ```bash
-   cp -r .claude/skills/youtube-vers-agent ~/.claude/skills/
-   ```
-
-3. Recarga plugins:
-   ```bash
-   /reload-plugins
-   ```
+Después, ejecuta /reload-plugins en Claude Code para volver a cargar los plugins.
 
 ## Uso
 
-Después de instalación, puedes usar la habilidad proporcionando una URL de YouTube y especificando qué quieres construir:
-
-```
-/youtube-vers-agent [URL de YouTube] [qué extraer] [qué construir]
+```text
+/youtube-vers-agent https://youtu.be/VIDEO_ID "todo el proyecto" "una skill de Claude Code"
 ```
 
-Ejemplo:
-```
-/youtube-vers-agent https://youtu.be/zke3bTtvmLo Todo el proyecto Una habilidad de Claude Code
-```
+## Archivos generados
 
-## Ejemplo de uso
+- `notes/lecture-claude.md` — Análisis del vídeo en seis partes de Claude
+- `notes/lecture-gemini.md` — Dos análisis independientes de Gemini, si está disponible
+- `notes/SPEC.md` — Especificación contrastada y preguntas pendientes
+- Skill generada en el directorio de salida elegido
 
-Transformar un tutorial de YouTube sobre creación de componentes React en una habilidad de Claude Code:
-1. Usa la habilidad watch para extraer transcripción de video y puntos clave
-2. Usa context7-mcp para verificar patrones de creación de componentes React contra documentación oficial de React
-3. Crea SKILL.md con procedimientos verificados para crear componentes React en Claude Code
-4. Incluye referencias tanto al tutorial de YouTube como a la documentación de React usada
+## Estructura del repositorio
 
-## Estándares de verificación
-
-Todas las habilidades creadas deben:
-- Referenciar al menos dos fuentes independientes (video + documentación)
-- Incluir pasos específicos y accionables
-- Proveer directrices de uso claras
-- Seguir el formato establecido de habilidades de Claude Code
-- Contener procedimientos verificables que puedan ser probados
+- `README.md` — Página principal en inglés
+- `README.<locale>.md` — Páginas traducidas identificadas por código de idioma
+- `SKILL.md` — Copia de referencia de la skill en la raíz del repositorio
+- `.claude/skills/youtube-vers-agent/SKILL.md` — Copia instalable de la skill del proyecto Claude Code, sincronizada con la copia raíz
 
 ## Licencia
 
-Licencia MIT - ver archivo [LICENSE](LICENSE) para detalles.
+Este proyecto se distribuye con la licencia MIT. Consulta LICENSE.

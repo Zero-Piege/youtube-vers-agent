@@ -1,109 +1,72 @@
-# youtube-vers-agent
+<h1 align="center">
+  <img src="https://cdn.simpleicons.org/youtube/FF0000" width="72" alt="YouTube" /> youtube-vers-agent
+</h1>
 
-YouTubeチュートリアルをローカルClaude + Geminiによるデュアルソース検証と仕様の相互参照を通じてClaude Codeスキルに変換するClaude Codeスキルです。
+<p align="center"><strong>YouTube のチュートリアルを、検証可能で分かりやすい Claude Code スキルに変換します。</strong></p>
 
-## 説明
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-2ea44f?style=flat" alt="MIT License" /></a>
+  <a href="https://github.com/Zero-Piege/youtube-vers-agent/stargazers"><img src="https://img.shields.io/github/stars/Zero-Piege/youtube-vers-agent?style=flat&logo=github" alt="GitHub stars" /></a>
+  <a href=".claude/skills/youtube-vers-agent/SKILL.md"><img src="https://img.shields.io/badge/Claude%20Code-skill-cb785c?style=flat&logo=anthropic&logoColor=white" alt="Claude Code skill" /></a>
+</p>
 
-このスキルは、以下を通じてYouTubeチュートリアルのコンテンツを構造化されたClaude Codeスキルに変換します：
-1. ビデオトランスクリプトから主要な概念と手順を抽出する
-2. デュアルソース検証（ビデオ + ドキュメント）を通じて情報を検証する
-3. Claude Codeの規則に従った適切にフォーマットされたSKILL.mdファイルを作成する
-4. 参照の相互参照を通じて正確性と完全性を確保する
+<p align="center">
+  <a href="README.md">🇬🇧 English</a> · <a href="README.zh.md">🇨🇳 中文</a> · <a href="README.zh-TW.md">🇹🇼 繁體中文</a> · <a href="README.ja.md">🇯🇵 日本語</a> · <a href="README.pt.md">🇵🇹 Português</a> · <a href="README.pt-BR.md">🇧🇷 Português (Brasil)</a> · <a href="README.ko.md">🇰🇷 한국어</a><br />
+  <a href="README.es.md">🇪🇸 Español</a> · <a href="README.de.md">🇩🇪 Deutsch</a> · <a href="README.fr.md">🇫🇷 Français</a> · <a href="README.he.md">🇮🇱 עברית</a> · <a href="README.ar.md">🇸🇦 العربية</a> · <a href="README.ru.md">🇷🇺 Русский</a> · <a href="README.pl.md">🇵🇱 Polski</a><br />
+  <a href="README.cs.md">🇨🇿 Čeština</a> · <a href="README.nl.md">🇳🇱 Nederlands</a> · <a href="README.tr.md">🇹🇷 Türkçe</a> · <a href="README.uk.md">🇺🇦 Українська</a> · <a href="README.vi.md">🇻🇳 Tiếng Việt</a> · <a href="README.tl.md">🇵🇭 Tagalog</a> · <a href="README.id.md">🇮🇩 Bahasa Indonesia</a><br />
+  <a href="README.th.md">🇹🇭 ไทย</a> · <a href="README.hi.md">🇮🇳 हिन्दी</a> · <a href="README.bn.md">🇧🇩 বাংলা</a> · <a href="README.ur.md">🇵🇰 اردو</a> · <a href="README.ro.md">🇷🇴 Română</a> · <a href="README.sv.md">🇸🇪 Svenska</a> · <a href="README.it.md">🇮🇹 Italiano</a><br />
+  <a href="README.el.md">🇬🇷 Ελληνικά</a> · <a href="README.hu.md">🇭🇺 Magyar</a> · <a href="README.fi.md">🇫🇮 Suomi</a> · <a href="README.da.md">🇩🇰 Dansk</a> · <a href="README.no.md">🇳🇴 Norsk</a>
+</p>
 
-## 使用するタイミング
+---
 
-このスキルは以下の場合に使用します：
-- 教育的なYouTubeコンテンツを再利用可能なClaude Codeスキルに変換する
-- 開発ツール、フレームワーク、または方法論に関するチュートリアルビデオに基づいてスキルを作成する
-- 公式ドキュメントとの照合を通じてスキルの正確性を確保する
-- ビデオ学習リソースから検証済みスキルのライブラリを構築する
+YouTube のリンクと目的を渡すと、Claude と Gemini が動画を独立して分析し、結果を notes/SPEC.md にまとめます。その仕様から再利用可能な Claude Code スキルを作成し、検証します。Gemini は任意です。利用できない場合は単一ソースとして記録します。
 
-## スキルワークフロー
+## ワークフロー
 
-### 1. ビデオ分析フェーズ
-- watchスキルを使用してYouTubeビデオを処理し、トランスクリプトと重要なフレームを抽出する
-- ビデオで提示される主要なトピック、手順、およびコード例を特定する
-- 学習目標と成果を構造化する
+1. **依頼を整理** — 動画から何を取り出し、何を作るか確認します。20 分を超える動画では、必要に応じて対象区間を指定します。
+2. **Claude で分析** — watch:watch のローカルエンジンを使い、6 部構成の仕様を notes/lecture-claude.md に保存します。
+3. **Gemini で独立分析** — Claude のメモを見せずに同じ分析を 2 回行い、両方の結果を notes/lecture-gemini.md に保存します。Gemini が利用できない場合は Claude のみで続行し、単一ソースと明記します。
+4. **結果を照合** — notes/SPEC.md の各項目に CONFIRMED、UNE SOURCE、DÉSACCORD のいずれかを付けます。食い違いは動画のフレームを再確認し、正確なコマンド、パッケージ名、設定、エラーメッセージを残します。
+5. **作成と検証** — 仕様を skill-creator に渡してスキルを作り、実際のケースで実行します。
 
-### 2. デュアルソース検証
-- 各主要な概念/手順について、context7-mcpまたはfind-docsスキルを使用して公式ドキュメントを参照する
-- ビデオコンテンツを権威あるソースと相互参照する
-- 不一致やバージョンの違いを記録する
-- コード例がデモンストレーション通りに機能することを検証する
+## 必要なもの
 
-### 3. スキル作成
-- Claude Codeの規則に従った適切にフォーマットされたSKILL.mdファイルを生成する
-- 明確な説明、使用ガイドライン、およびステップバイステップのワークフローを含める
-- 検証に使用されたビデオソースとドキュメントソースを参照する
-- 検証された手順に基づいて適切なツールの推奨事項を追加する
-
-### 4. 品質保証
-- 説明されているコード例または手順をテストする
-- スキルがClaude Codeスキルフォーマット標準に従っていることを検証する
-- スキルが実行可能かつ検証可能なガイダンスを提供することを確認する
-
-## 出力
-
-適切な.claude/skills/ディレクトリに完全なSKILL.mdファイルを生成し、それが：
-- スキルの目的と適用性を明確に定義する
-- 特定の使用ガイドラインを提供する
-- 検証可能なワークフローを概説する
-- デュアルソース検証に使用されたソースを参照する
-- Claude Codeスキルの規則に従う
-
-## 必要なツール
-
-- watch：YouTubeビデオコンテンツの処理用
-- context7-mcpまたはfind-docs：公式ドキュメントに対するデュアルソース検証用
-- Bash：ファイル操作とスキル作成用
+- Claude Code
+- YouTube 動画分析用の watch:watch スキル
+- 成果物の作成に使う skill-creator スキル
+- Gemini（任意。Claude のみでの代替手順に対応）
 
 ## インストール
 
-1. このリポジトリをクローン：
-   ```bash
-   git clone https://github.com/Zero-Piege/youtube-vers-agent
-   ```
-
-2. スキルをClaude Codeスキルディレクトリにコピー：
-   ```bash
-   cp -r .claude/skills/youtube-vers-agent ~/.claude/skills/
-   ```
-
-3. プラグインを再読み込み：
-   ```bash
-   /reload-plugins
-   ```
-
-## 使用方法
-
-インストール後、YouTube URLと構築したいものを指定してスキルを使用できます：
-
-```
-/youtube-vers-agent [YouTube URL] [抽出するもの] [構築するもの]
+```bash
+git clone https://github.com/Zero-Piege/youtube-vers-agent.git
+cd youtube-vers-agent
+cp -r .claude/skills/youtube-vers-agent ~/.claude/skills/
 ```
 
-例：
+続いて Claude Code で /reload-plugins を実行し、プラグインを再読み込みします。
+
+## 使い方
+
+```text
+/youtube-vers-agent https://youtu.be/VIDEO_ID "プロジェクト全体" "Claude Code スキル"
 ```
-/youtube-vers-agent https://youtu.be/zke3bTtvmLo 全プロジェクト Claude Codeスキル
-```
 
-## 使用例
+## 生成されるファイル
 
-Reactコンポーネント作成のYouTubeチュートリアルをClaude Codeスキルに変換する：
-1. watchスキルを使用してビデオトランスクリプトとキーポイントを抽出する
-2. context7-mcpを使用してReactコンポーネント作成パターンを公式Reactドキュメントと照合する
-3. Claude CodeでのReactコンポーネント作成の検証済み手順を含むSKILL.mdを作成する
-4. 使用したYouTubeチュートリアルとReactドキュメントへの参照を含める
+- `notes/lecture-claude.md` — Claude による 6 部構成の動画分析
+- `notes/lecture-gemini.md` — Gemini による 2 回の独立分析（利用可能な場合）
+- `notes/SPEC.md` — 照合済み仕様と未解決の質問
+- 選択した出力フォルダーに生成されるスキル
 
-## 検証基準
+## リポジトリの構成
 
-作成されたすべてのスキルは以下を満たさなければなりません：
-- 少なくとも2つの独立したソース（ビデオ + ドキュメント）を参照する
-- 具体的で実行可能な手順を含む
-- 明確な使用ガイドラインを提供する
-- 確立されたClaude Codeスキルフォーマットに従う
-- テスト可能な検証済み手順を含む
+- `README.md` — 英語のプロジェクトトップページ
+- `README.<locale>.md` — 言語コード別の翻訳ページ
+- `SKILL.md` — リポジトリ内のスキル原本
+- `.claude/skills/youtube-vers-agent/SKILL.md` — Claude Code のプロジェクトスキル用インストール先。ルートの原本と同期します
 
 ## ライセンス
 
-MITライセンス - 詳細については[LICENSE](LICENSE)ファイルを参照してください。
+本プロジェクトは MIT ライセンスで公開されています。詳細は LICENSE を参照してください。
