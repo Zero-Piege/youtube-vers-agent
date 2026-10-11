@@ -61,7 +61,7 @@ Produces a complete SKILL.md file in the appropriate .claude/skills/ directory t
 
 1. Clone this repository:
    ```bash
-   git clone <repository-url>
+   git clone <[repository-url](https://github.com/Zero-Piege/youtube-vers-agent>
    ```
 
 2. Copy the skill to your Claude Code skills directory:
