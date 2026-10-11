@@ -1,29 +1,29 @@
-<div style="background:#0b1220; color:#edf3ff; font-family:Segoe UI, Arial, sans-serif; border:1px solid #1d2a39; border-radius:10px; overflow:hidden; max-width:1200px; margin:0 auto;">
+<div style="background:#0b1220; color:#edf3ff; font-family:Segoe UI, Arial, sans-serif; border:1px solid #1d2a39; border-radius:12px; overflow:hidden; max-width:1200px; margin:0 auto;">
   <div style="display:flex; align-items:center; justify-content:space-between; padding:16px 22px 14px; border-bottom:1px solid #263548; background:#0b1220;">
-    <div style="display:flex; align-items:center; gap:28px; font-size:18px; font-weight:700;">
+    <div style="display:flex; align-items:center; gap:30px; font-size:18px; font-weight:700;">
       <span style="color:#f7f9ff; border-bottom:3px solid #ff5b28; padding-bottom:12px;">README</span>
       <span style="color:#dfe9f8; opacity:0.9; font-weight:500;">Apache-2.0 license</span>
       <span style="color:#dfe9f8; opacity:0.9; font-weight:500;">Security</span>
     </div>
-    <div style="display:flex; align-items:center; gap:16px; color:#dfe9f8; font-size:20px; opacity:0.9;">
+    <div style="display:flex; align-items:center; gap:18px; color:#dfe9f8; font-size:20px; opacity:0.9;">
       <span>◌</span>
       <span>✎</span>
       <span>☰</span>
     </div>
   </div>
 
-  <div style="padding:30px 24px 18px; background:#0b1220;">
-    <div style="display:flex; align-items:center; justify-content:center; gap:24px; margin:10px auto 18px;">
-      <div style="position:relative; width:118px; height:118px; border-radius:50%; background:radial-gradient(circle at center, #ff9d56 0%, #ff7a32 28%, #ffb870 48%, #f26d2e 66%, #e75a28 100%); box-shadow:0 0 0 10px rgba(255,122,61,0.14);">
+  <div style="padding:34px 26px 18px; background:#0b1220;">
+    <div style="display:flex; align-items:center; justify-content:center; gap:24px; margin:8px auto 20px;">
+      <div style="position:relative; width:120px; height:120px; border-radius:50%; background:radial-gradient(circle at center, #ff9d56 0%, #ff7a32 30%, #ffb870 52%, #f26d2e 68%, #e75a28 100%); box-shadow:0 0 0 10px rgba(255,122,61,0.14);">
         <div style="position:absolute; inset:0; display:grid; place-items:center;">
-          <div style="width:44px; height:44px; border-radius:50%; background:#ffb874; box-shadow:0 0 0 8px rgba(255,179,106,0.16);"></div>
+          <div style="width:42px; height:42px; border-radius:50%; background:#ffb874; box-shadow:0 0 0 8px rgba(255,179,106,0.16);"></div>
         </div>
       </div>
-      <h1 style="margin:0; font-family:Georgia, 'Times New Roman', serif; font-style:italic; font-size:64px; letter-spacing:-0.06em; font-weight:500; color:#f2f5ff; text-shadow:0 0 0 transparent;">youtube-vers-agent</h1>
+      <h1 style="margin:0; font-family:Georgia, 'Times New Roman', serif; font-style:italic; font-size:68px; letter-spacing:-0.06em; font-weight:500; color:#f2f5ff;">youtube-vers-agent</h1>
     </div>
 
-    <div style="border-top:1px solid #2b3a4a; border-bottom:1px solid #2b3a4a; margin-top:18px; padding:16px 0;">
-      <div style="display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:16px 22px; color:#dfe9f8; font-weight:700; font-size:14px; letter-spacing:0.06em; text-transform:uppercase;">
+    <div style="border-top:1px solid #2b3a4a; border-bottom:1px solid #2b3a4a; margin-top:18px; padding:18px 0;">
+      <div style="display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:18px 24px; color:#dfe9f8; font-weight:700; font-size:14px; letter-spacing:0.06em; text-transform:uppercase;">
         <div style="display:flex; align-items:center; gap:10px;">
           <span style="display:inline-block; width:0; height:0; border-top:8px solid transparent; border-bottom:8px solid transparent; border-left:14px solid #dfe9f8; margin-right:4px;"></span>
           <span>Version</span>
@@ -52,7 +52,7 @@
       <span style="display:inline-block; padding:8px 14px; border-radius:8px; background:#243a63; border:1px solid #3a4f7f; color:#dfe7ff; font-weight:600;">Node ≥ 20.0</span>
     </div>
 
-    <div style="display:flex; justify-content:center; margin-top:32px; margin-bottom:8px;">
+    <div style="display:flex; justify-content:center; margin-top:34px; margin-bottom:8px;">
       <div style="display:inline-flex; align-items:center; gap:12px; border:1px solid #2e4058; background:#171f2d; border-radius:12px; padding:12px 18px; color:#edf3ff; font-weight:700; letter-spacing:0.04em; text-transform:uppercase;">
         <span style="font-size:28px; color:#f0d48b;">✦</span>
         <span>GitHub Trending</span>
@@ -62,7 +62,7 @@
   </div>
 </div>
 
-<hr style="margin:18px 0 14px; border:0; border-top:1px solid #2a384d;" />
+<hr style="margin:28px 0 14px; border:0; border-top:1px solid #2a384d;" />
 
 # README
 
