@@ -2,12 +2,12 @@
   <img src="https://cdn.simpleicons.org/youtube/FF0000" width="72" alt="YouTube" /> youtube-vers-agent
 </h1>
 
-<p align="center"><strong>Turn YouTube tutorials into clear, verified Claude Code skills or ChatGPT workflows.</strong></p>
+<p align="center"><strong>Turn YouTube tutorials into clear, verified skills and workflows for multiple AI agents.</strong></p>
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-2ea44f?style=flat" alt="MIT License" /></a>
   <a href="https://github.com/Zero-Piege/youtube-vers-agent/stargazers"><img src="https://img.shields.io/github/stars/Zero-Piege/youtube-vers-agent?style=flat&logo=github" alt="GitHub stars" /></a>
-  <a href=".claude/skills/youtube-vers-agent/SKILL.md"><img src="https://img.shields.io/badge/Claude%20Code-skill-cb785c?style=flat&logo=anthropic&logoColor=white" alt="Claude Code skill" /></a>
+  <a href="docs/platforms/README.md"><img src="https://img.shields.io/badge/Agent%20Skills-multi--platform-6f42c1?style=flat&logo=github" alt="Multi-platform Agent Skills" /></a>
   <img src="https://img.shields.io/badge/languages-33-2ea44f?style=flat" alt="33 languages" />
 </p>
 
@@ -21,9 +21,20 @@
 
 ---
 
-youtube-vers-agent is a Claude Code skill. Give it a YouTube tutorial and a concrete goal, and it turns what the video actually demonstrates into a careful specification and a reusable result for the platform you choose. Claude analyzes the video first; Gemini can independently analyze it twice for comparison. If Gemini is unavailable, the workflow continues with Claude and marks findings as coming from a single source.
+youtube-vers-agent is a video-to-agent workflow. Give it a YouTube tutorial and a concrete goal, and it turns what the video actually demonstrates into a careful specification and a reusable result for the platform you choose. The analysis can use the tools available in Claude Code or another host; a second Gemini reading is optional and is never assumed to be available.
 
-The result can be a Claude Code skill, a ChatGPT Skill package, a prompt or instructions for ChatGPT, or another clearly scoped artifact. ChatGPT Skills are a separate product feature: access and setup depend on current account and workspace eligibility. The workflow checks current official OpenAI guidance instead of assuming that every ChatGPT account can install one.
+The repository provides a Claude Code skill and a portable Agent Skill for Codex, Gemini CLI, and GitHub Copilot. It can also prepare ChatGPT Skill packages, ChatGPT Project instructions, OpenAI API/Agents SDK skill directories, or one-off prompts. These products share a workflow standard, but each has separate installation paths, tools, permissions, and account requirements.
+
+## Supported platforms
+
+- **Claude Code** — native project skill under **.claude/skills/**.
+- **Codex** — portable repository skill discovered from **.agents/skills/**.
+- **Gemini CLI and GitHub Copilot** — Agent Skills from **.agents/skills/**.
+- **ChatGPT desktop Skills** — upload the portable Agent Skill when Skills are enabled for the account and workspace.
+- **ChatGPT Projects** — use project-scoped instructions when native Skills are unavailable.
+- **OpenAI API / Agents SDK** — provide the skill package to the agent’s sandbox or API runtime; credentials and connections are separate setup.
+
+See the [platform guide](docs/platforms/README.md) for install steps, official documentation, and limits. A Skill does not itself connect accounts, grant permissions, or make a video transcript available.
 
 ## How it works
 
@@ -32,31 +43,25 @@ The result can be a Claude Code skill, a ChatGPT Skill package, a prompt or inst
 Decide what to take from the video and what to make from it. The request might cover the whole tutorial or one specific segment. Choose the destination too:
 
 - **Claude Code skill** — a reusable workflow installed for Claude Code.
+- **Codex / Agent Skill** — a portable SKILL.md folder loaded by a compatible coding agent.
 - **ChatGPT Skill** — a reusable workflow package for ChatGPT, when the account and workspace can create or install Skills.
 - **ChatGPT prompt or instructions** — a copy-ready prompt for one conversation, Project instructions scoped to a project, or Custom Instructions for account-wide preferences.
 - **ChatGPT plugin** — a workflow that also needs connected apps, MCP tools, or supported actions.
+- **OpenAI API / Agents SDK** — a skill or integrated agent workflow provided to an application runtime.
+- **Gemini CLI or GitHub Copilot** — a portable Agent Skill installed through the host’s documented path.
 - **Another artifact** — such as a script or a website, when that is what the video and goal call for.
 
 If the video is longer than 20 minutes, pick a useful segment with `--start` and `--end` when the whole tutorial is not needed.
 
-### 2. Analyze the video with Claude
+### 2. Analyze with the tools available on the chosen platform
 
-The skill uses the local engine in `watch:watch` to produce a six-part account of what the video shows:
+In Claude Code, the project adapter can use the local `watch:watch` engine to record six points in `notes/lecture-claude.md`: what is built; tools and prerequisites; visible commands and settings; construction order; errors and pitfalls; and steps the video skips or assumes.
 
-1. What is actually built.
-2. Tools and prerequisites, including visible versions and costs.
-3. Commands and settings as shown, without guessing when text is unreadable.
-4. The actual construction order, including steps that are undone or repeated.
-5. Errors, warnings, and pitfalls shown or mentioned.
-6. What the video skips, assumes, or never demonstrates.
+On Codex, ChatGPT, Gemini CLI, Copilot, or an API runtime, use only the video, transcript, browser, and file tools that are actually available there. Ask for a transcript or relevant screenshots if the video cannot be accessed. Preserve legible details and mark unknowns instead of guessing. A skill package does not provide video access by itself.
 
-The analysis is saved to `notes/lecture-claude.md`. When code appears on screen, use a resolution that makes the commands and files legible.
+### 3. Add an independent reading when available
 
-### 3. Get an independent Gemini reading
-
-When Gemini is available, ask it to analyze the same video twice with the same questions. Do not show it Claude's notes before either reading. Save both responses in `notes/lecture-gemini.md`.
-
-This second reading is optional. If Gemini is unavailable or its quota is exhausted, continue with Claude and label the evidence as single-source.
+A second model review is optional. If Gemini or another model is genuinely available, ask it the same questions without showing it the first analysis, then save its response separately (for example, in `notes/lecture-gemini.md`). If no second reader is available, continue with the evidence on hand and label claims that have only one source.
 
 ### 4. Compare the evidence in `SPEC.md`
 
@@ -70,16 +75,18 @@ Recheck relevant video frames to resolve disagreements. Keep exact commands, pac
 
 ### 5. Build for the selected platform
 
-Use `skill-creator` with the verified specification and name the intended destination. Keep each result specific to the way that platform handles instructions and tools:
+Use the platform’s available authoring tools, including `skill-creator` when it is available in Claude Code, and name the intended destination. Adapt the result to the way that platform handles instructions and tools:
 
-- A **Claude Code skill** gets the project skill format and local installation instructions.
-- A **ChatGPT Skill** gets a `SKILL.md` with `name` and `description` front matter, plus only the resources it needs. Include current ChatGPT installation instructions and explain that the feature may not be available in every account or workspace.
+- A **Claude Code skill** uses Claude Code’s project format and installation path.
+- A **Codex, Gemini CLI, or GitHub Copilot skill** uses the portable Agent Skills format and the host’s documented discovery and invocation steps.
+- A **ChatGPT Skill** uses a `SKILL.md` with `name` and `description` front matter, plus only the resources it needs. Include current installation instructions and explain that the feature may not be available in every account or workspace.
 - A **prompt or instruction set** is written for its scope: one conversation, a ChatGPT Project, or account-wide Custom Instructions.
+- An **OpenAI API or Agents SDK skill** includes instructions for exposing the package to the runtime. API credentials, sandbox access, and connectors are configured separately.
 - A **plugin** is used only when the workflow needs connected apps or tools. Skill instructions alone do not connect accounts or grant permissions.
 
 ### 6. Test and refine
 
-Exercise the result with three kinds of request: a typical use, an edge case, and something outside its intended scope. State what a good response should do. If the target platform is available, run the checks and fix what fails. If ChatGPT access depends on the user's own account, provide copy-ready test prompts and expected results without claiming that account-specific installation was verified.
+Prepare three test prompts: a typical use, an edge case, and something outside the intended scope. State what a good response should do. Run checks only when the user asks for testing or verification and the target is available. Otherwise provide the prompts and expected results without claiming that the platform was tested.
 
 ## Use a ChatGPT Skill
 
@@ -95,12 +102,9 @@ Labels and access can change, and workspace administrators can control availabil
 
 ## Requirements
 
-To run youtube-vers-agent itself:
+The Claude Code path uses Claude Code and can use `watch:watch` for video analysis and `skill-creator` when available. Gemini is optional.
 
-- Claude Code.
-- The `watch:watch` skill for video analysis.
-- The `skill-creator` skill to build the selected result.
-- Gemini access is optional; the Claude-only path is supported.
+The portable Agent Skill can run in compatible Codex, Gemini CLI, and GitHub Copilot hosts without Claude Code. Every host still needs its own video or transcript tools when the task requires them. ChatGPT Skills, Projects, and API workflows have separate account, workspace, and runtime requirements; see the [platform guide](docs/platforms/README.md).
 
 To install and test the result in ChatGPT, you also need access to the relevant ChatGPT feature. The skill checks current official guidance and provides a prompt or instruction fallback when needed.
 
@@ -116,27 +120,33 @@ cp -r .claude/skills/youtube-vers-agent ~/.claude/skills/
 
 In Claude Code, run `/reload-plugins` so the skill appears in the current session.
 
+## Other platform installs
+
+For Codex, Gemini CLI, and GitHub Copilot, use the portable package in **.agents/skills/youtube-vers-agent/**. ChatGPT desktop Skills can use that package when the account and workspace allow Skills. If they do not, copy [the ChatGPT Project instructions](docs/platforms/chatgpt-project-instructions.md) into the Project settings. OpenAI API and Agents SDK deployments need a separately configured runtime. See the [platform guide](docs/platforms/README.md).
+
 ## Use the skill
 
-Give it a video URL, the portion you care about, and the target result. For example:
+Give the skill a video URL, the portion you care about, and the target result. In Claude Code, for example:
 
 ```text
 /youtube-vers-agent https://youtu.be/VIDEO_ID "the whole project" "a ChatGPT Skill"
 ```
 
-For a Claude Code skill, specify that instead:
+In Codex, use its Agent Skill invocation:
 
 ```text
-/youtube-vers-agent https://youtu.be/VIDEO_ID "the whole project" "a Claude Code skill"
+$youtube-vers-agent https://youtu.be/VIDEO_ID "the whole project" "a ChatGPT Skill"
 ```
+
+For other hosts, use their documented skill picker or invocation method.
 
 If the target is unclear, the skill asks before choosing a format. It does not assume that a ChatGPT Skill, a ChatGPT prompt, and a Claude Code skill install the same way.
 
 ## Generated files
 
-- `notes/lecture-claude.md` — Claude's six-part video analysis.
-- `notes/lecture-gemini.md` — Gemini's two independent readings, when available.
-- `notes/SPEC.md` — Claims cross-checked against the video, disagreements, and open questions.
+- `notes/lecture-claude.md` — six-part analysis from the Claude Code adapter, when used.
+- `notes/lecture-gemini.md` — an optional independent model reading, when available.
+- `notes/SPEC.md` — a traceable specification for requested builds, with evidence, disagreements, and open questions.
 - The requested result in the selected output directory.
 - Target-specific install/use instructions and prompts for testing.
 
@@ -145,8 +155,11 @@ If the target is unclear, the skill asks before choosing a format. It does not a
 ```text
 README.md                                      Full English guide and GitHub landing page
 docs/readmes/README.<locale>.md                Translated guides
-.claude/skills/youtube-vers-agent/SKILL.md     The installable Claude Code skill
+.claude/skills/youtube-vers-agent/SKILL.md     Claude Code project skill
+.agents/skills/youtube-vers-agent/SKILL.md     Portable Agent Skill
 ```
+
+Platform installation and product-specific limits are documented in **docs/platforms/**. The Claude and portable skill files share the workflow while preserving host-specific instructions.
 
 ## License
 

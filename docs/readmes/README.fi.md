@@ -2,12 +2,12 @@
   <img src="https://cdn.simpleicons.org/youtube/FF0000" width="72" alt="YouTube" /> youtube-vers-agent
 </h1>
 
-<p align="center"><strong>Muunna YouTube-oppaat selkeiksi ja tarkistetuiksi Claude Code -taidoiksi.</strong></p>
+<p align="center"><strong>Muunna YouTube-oppaat selkeiksi ja tarkistetuiksi taidoiksi ja työnkuluiksi useille tekoälyagenteille.</strong></p>
 
 <p align="center">
   <a href="../../LICENSE"><img src="https://img.shields.io/badge/License-MIT-2ea44f?style=flat" alt="MIT License" /></a>
   <a href="https://github.com/Zero-Piege/youtube-vers-agent/stargazers"><img src="https://img.shields.io/github/stars/Zero-Piege/youtube-vers-agent?style=flat&logo=github" alt="GitHub stars" /></a>
-  <a href="../../.claude/skills/youtube-vers-agent/SKILL.md"><img src="https://img.shields.io/badge/Claude%20Code-skill-cb785c?style=flat&logo=anthropic&logoColor=white" alt="Claude Code skill" /></a>
+  <a href="../../docs/platforms/README.md"><img src="https://img.shields.io/badge/Agent%20Skills-multi--platform-6f42c1?style=flat&logo=github" alt="Multi-platform support" /></a>
 </p>
 
 <p align="center">
@@ -19,6 +19,8 @@
 </p>
 
 ---
+
+Tämä repositorio tukee useita agenttialustoja. Tällä sivulla kuvataan Claude Code -työnkulku; siirrettävät muodot ja Codexin, Gemini CLI:n, GitHub Copilotin, ChatGPT:n sekä OpenAI API:n käyttöönotto löytyvät [alustaoppaasta](../../docs/platforms/README.md).
 
 Anna YouTube-linkki ja tavoite. Taito analysoi videon itsenäisesti Clauden ja Geminin avulla, kokoaa havainnot tiedostoon notes/SPEC.md ja luo sekä tarkistaa uudelleenkäytettävän Claude Code -taidon. Gemini on valinnainen; ilman sitä tulos merkitään yhden lähteen varaan perustuvaksi.
 

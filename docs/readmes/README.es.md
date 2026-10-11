@@ -2,12 +2,12 @@
   <img src="https://cdn.simpleicons.org/youtube/FF0000" width="72" alt="YouTube" /> youtube-vers-agent
 </h1>
 
-<p align="center"><strong>Convierte tutoriales de YouTube en skills claras y verificadas para Claude Code.</strong></p>
+<p align="center"><strong>Convierte tutoriales de YouTube en skills y flujos de trabajo claros y verificados para varios agentes de IA.</strong></p>
 
 <p align="center">
   <a href="../../LICENSE"><img src="https://img.shields.io/badge/License-MIT-2ea44f?style=flat" alt="MIT License" /></a>
   <a href="https://github.com/Zero-Piege/youtube-vers-agent/stargazers"><img src="https://img.shields.io/github/stars/Zero-Piege/youtube-vers-agent?style=flat&logo=github" alt="GitHub stars" /></a>
-  <a href="../../.claude/skills/youtube-vers-agent/SKILL.md"><img src="https://img.shields.io/badge/Claude%20Code-skill-cb785c?style=flat&logo=anthropic&logoColor=white" alt="Claude Code skill" /></a>
+  <a href="../../docs/platforms/README.md"><img src="https://img.shields.io/badge/Agent%20Skills-multi--platform-6f42c1?style=flat&logo=github" alt="Multi-platform support" /></a>
 </p>
 
 <p align="center">
@@ -19,6 +19,8 @@
 </p>
 
 ---
+
+Este repositorio admite varias plataformas de agentes. Esta página describe el flujo de Claude Code; los formatos portátiles y la configuración de Codex, Gemini CLI, GitHub Copilot, ChatGPT y la API de OpenAI están en la [guía de plataformas](../../docs/platforms/README.md).
 
 Proporciona un enlace de YouTube y un objetivo. La skill analiza el vídeo de forma independiente con Claude y Gemini, reúne los resultados en notes/SPEC.md y crea y valida una skill reutilizable para Claude Code. Gemini es opcional; si no está disponible, el resultado se marca como de una sola fuente.
 

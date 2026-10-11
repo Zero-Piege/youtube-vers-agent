@@ -2,12 +2,12 @@
   <img src="https://cdn.simpleicons.org/youtube/FF0000" width="72" alt="YouTube" /> youtube-vers-agent
 </h1>
 
-<p align="center"><strong>將 YouTube 教學轉化為清楚、經過核實的 Claude Code 技能。</strong></p>
+<p align="center"><strong>將 YouTube 教學轉化為適用於多種 AI 代理的清楚、經過核實的技能與工作流程。</strong></p>
 
 <p align="center">
   <a href="../../LICENSE"><img src="https://img.shields.io/badge/License-MIT-2ea44f?style=flat" alt="MIT License" /></a>
   <a href="https://github.com/Zero-Piege/youtube-vers-agent/stargazers"><img src="https://img.shields.io/github/stars/Zero-Piege/youtube-vers-agent?style=flat&logo=github" alt="GitHub stars" /></a>
-  <a href="../../.claude/skills/youtube-vers-agent/SKILL.md"><img src="https://img.shields.io/badge/Claude%20Code-skill-cb785c?style=flat&logo=anthropic&logoColor=white" alt="Claude Code skill" /></a>
+  <a href="../../docs/platforms/README.md"><img src="https://img.shields.io/badge/Agent%20Skills-multi--platform-6f42c1?style=flat&logo=github" alt="Multi-platform support" /></a>
 </p>
 
 <p align="center">
@@ -19,6 +19,8 @@
 </p>
 
 ---
+
+此儲存庫支援多種代理平台。本頁說明 Claude Code 的工作流程；Codex、Gemini CLI、GitHub Copilot、ChatGPT 與 OpenAI API 的可攜式格式及設定方式，請參閱[平台指南](../../docs/platforms/README.md)。
 
 提供 YouTube 連結和目標後，這項技能會分別使用 Claude 與 Gemini 分析影片，將結果整理到 notes/SPEC.md，再建置並驗證可重複使用的 Claude Code 技能。Gemini 為選用；無法使用時會註明結果僅來自單一來源。
 

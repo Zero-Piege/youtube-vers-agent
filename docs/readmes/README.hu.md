@@ -2,12 +2,12 @@
   <img src="https://cdn.simpleicons.org/youtube/FF0000" width="72" alt="YouTube" /> youtube-vers-agent
 </h1>
 
-<p align="center"><strong>Alakítsd a YouTube-oktatóanyagokat világos, ellenőrzött Claude Code-készségekké.</strong></p>
+<p align="center"><strong>Alakítsd a YouTube-oktatóanyagokat több MI-ügynök számára készült világos, ellenőrzött készségekké és munkafolyamatokká.</strong></p>
 
 <p align="center">
   <a href="../../LICENSE"><img src="https://img.shields.io/badge/License-MIT-2ea44f?style=flat" alt="MIT License" /></a>
   <a href="https://github.com/Zero-Piege/youtube-vers-agent/stargazers"><img src="https://img.shields.io/github/stars/Zero-Piege/youtube-vers-agent?style=flat&logo=github" alt="GitHub stars" /></a>
-  <a href="../../.claude/skills/youtube-vers-agent/SKILL.md"><img src="https://img.shields.io/badge/Claude%20Code-skill-cb785c?style=flat&logo=anthropic&logoColor=white" alt="Claude Code skill" /></a>
+  <a href="../../docs/platforms/README.md"><img src="https://img.shields.io/badge/Agent%20Skills-multi--platform-6f42c1?style=flat&logo=github" alt="Multi-platform support" /></a>
 </p>
 
 <p align="center">
@@ -19,6 +19,8 @@
 </p>
 
 ---
+
+Ez a tároló több ügynökplatformot támogat. Ez az oldal a Claude Code munkafolyamatát írja le; a hordozható formátumokat és a Codex, Gemini CLI, GitHub Copilot, ChatGPT, valamint OpenAI API beállítását a [platformútmutató](../../docs/platforms/README.md) ismerteti.
 
 Adj meg egy YouTube-linket és egy célt. A készség Claude és Gemini segítségével egymástól függetlenül elemzi a videót, az eredményeket a notes/SPEC.md fájlban egyesíti, majd újrafelhasználható Claude Code-készséget hoz létre és ellenőriz. A Gemini használata nem kötelező; nélküle az eredmény egyetlen forrásból származóként lesz megjelölve.
 

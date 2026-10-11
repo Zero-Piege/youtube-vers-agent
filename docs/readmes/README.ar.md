@@ -2,12 +2,12 @@
   <img src="https://cdn.simpleicons.org/youtube/FF0000" width="72" alt="YouTube" /> youtube-vers-agent
 </h1>
 
-<p align="center"><strong>حوّلوا دروس YouTube إلى مهارات Claude Code واضحة ومتحقَّق منها.</strong></p>
+<p align="center"><strong>حوّلوا دروس YouTube إلى مهارات وسير عمل واضحة ومتحقَّق منها لعدة وكلاء ذكاء اصطناعي.</strong></p>
 
 <p align="center">
   <a href="../../LICENSE"><img src="https://img.shields.io/badge/License-MIT-2ea44f?style=flat" alt="MIT License" /></a>
   <a href="https://github.com/Zero-Piege/youtube-vers-agent/stargazers"><img src="https://img.shields.io/github/stars/Zero-Piege/youtube-vers-agent?style=flat&logo=github" alt="GitHub stars" /></a>
-  <a href="../../.claude/skills/youtube-vers-agent/SKILL.md"><img src="https://img.shields.io/badge/Claude%20Code-skill-cb785c?style=flat&logo=anthropic&logoColor=white" alt="Claude Code skill" /></a>
+  <a href="../../docs/platforms/README.md"><img src="https://img.shields.io/badge/Agent%20Skills-multi--platform-6f42c1?style=flat&logo=github" alt="Multi-platform support" /></a>
 </p>
 
 <p align="center">
@@ -19,6 +19,8 @@
 </p>
 
 ---
+
+يدعم هذا المستودع عدة منصات للوكلاء. تشرح هذه الصفحة سير العمل الخاص بـ Claude Code؛ أما التنسيقات المحمولة وإعدادات Codex وGemini CLI وGitHub Copilot وChatGPT وواجهة OpenAI API فتجدها في [دليل المنصات](../../docs/platforms/README.md).
 
 قدّموا رابط YouTube والهدف المطلوب. تحلّل المهارة الفيديو بشكل مستقل باستخدام Claude وGemini، وتجمع النتائج في notes/SPEC.md، ثم تنشئ مهارة Claude Code قابلة لإعادة الاستخدام وتتحقق منها. استخدام Gemini اختياري؛ وعند عدم توفره تُوسم النتيجة بأنها مستندة إلى مصدر واحد.
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "YouTube vers agent"
+  short_description: "Transforme un tutoriel en skill ou workflow adapté à l’agent choisi."
+  default_prompt: "Transforme ce tutoriel en un livrable vérifiable pour la plateforme que je choisis. Demande-moi seulement les précisions indispensables."

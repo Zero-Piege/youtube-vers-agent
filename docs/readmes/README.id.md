@@ -2,12 +2,12 @@
   <img src="https://cdn.simpleicons.org/youtube/FF0000" width="72" alt="YouTube" /> youtube-vers-agent
 </h1>
 
-<p align="center"><strong>Ubah tutorial YouTube menjadi skill Claude Code yang jelas dan terverifikasi.</strong></p>
+<p align="center"><strong>Ubah tutorial YouTube menjadi skill dan alur kerja yang jelas serta terverifikasi untuk berbagai agen AI.</strong></p>
 
 <p align="center">
   <a href="../../LICENSE"><img src="https://img.shields.io/badge/License-MIT-2ea44f?style=flat" alt="MIT License" /></a>
   <a href="https://github.com/Zero-Piege/youtube-vers-agent/stargazers"><img src="https://img.shields.io/github/stars/Zero-Piege/youtube-vers-agent?style=flat&logo=github" alt="GitHub stars" /></a>
-  <a href="../../.claude/skills/youtube-vers-agent/SKILL.md"><img src="https://img.shields.io/badge/Claude%20Code-skill-cb785c?style=flat&logo=anthropic&logoColor=white" alt="Claude Code skill" /></a>
+  <a href="../../docs/platforms/README.md"><img src="https://img.shields.io/badge/Agent%20Skills-multi--platform-6f42c1?style=flat&logo=github" alt="Multi-platform support" /></a>
 </p>
 
 <p align="center">
@@ -19,6 +19,8 @@
 </p>
 
 ---
+
+Repositori ini mendukung beberapa platform agen. Halaman ini menjelaskan alur Claude Code; format portabel dan cara menyiapkan Codex, Gemini CLI, GitHub Copilot, ChatGPT, serta OpenAI API ada di [panduan platform](../../docs/platforms/README.md).
 
 Berikan tautan YouTube dan tujuan. Skill menganalisis video secara terpisah dengan Claude dan Gemini, merangkum temuan di notes/SPEC.md, lalu membuat dan memvalidasi skill Claude Code yang dapat digunakan kembali. Gemini bersifat opsional; tanpa Gemini, hasil ditandai berasal dari satu sumber.
 

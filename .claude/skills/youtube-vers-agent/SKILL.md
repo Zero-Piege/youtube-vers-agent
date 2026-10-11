@@ -1,6 +1,6 @@
 ---
 name: youtube-vers-agent
-description: Transforme un tutoriel YouTube en skill Claude Code ou ChatGPT, ou en prompt/instructions adaptés à ChatGPT. À utiliser quand l'utilisateur partage une vidéo et demande de créer, reproduire, expliquer ou tester son workflow, ou demande comment l'adapter à ChatGPT. Deux lectures indépendantes (Claude et Gemini), croisées dans SPEC.md, puis livrable adapté à la plateforme choisie.
+description: Transforme un tutoriel YouTube en livrable vérifiable pour Claude Code, ChatGPT, Codex, OpenAI Agents, Gemini CLI ou GitHub Copilot. À utiliser quand l’utilisateur veut extraire, reproduire ou convertir le workflow d’une vidéo en skill, prompt ou instructions. Analyse locale avec Claude, comparaison Gemini facultative, puis adaptation au format et aux outils de la plateforme choisie.
 ---
 
 ## Choose the Target Platform
@@ -12,7 +12,7 @@ Before analyzing the video, establish what the user wants to use:
 - **ChatGPT prompt or instructions**: Produce a copy-ready one-off prompt, Project instructions for work scoped to a project, or Custom Instructions for account-wide preferences. Recommend the narrowest fit. Check current official documentation before giving UI steps or field limits.
 - **ChatGPT plugin with connected tools**: Choose this only when the user needs external apps, MCP tools, or supported actions. A skill by itself does not connect accounts or grant permissions. Explain which plugin/app connections and permissions the proposed workflow would require.
 
-If the target is unclear, ask whether the user wants Claude Code, a ChatGPT Skill, or prompts/instructions for ChatGPT. Do not call a Claude Code skill a ChatGPT Skill or imply that both products install it the same way. GPTs/custom GPTs are not the default recommendation: verify their current availability and lifecycle in official OpenAI documentation before advising the user to create or migrate one.
+If the target is unclear, ask which platform and deliverable the user wants. Do not call every output a Skill or imply that different products install it the same way. GPTs/custom GPTs are not the default recommendation: verify their current availability and lifecycle in official OpenAI documentation before advising the user to create or migrate one.
 
 If the user asks for advice about using ChatGPT rather than asking to build something, answer directly; do not force the video-building workflow. Use video findings when a video is part of the request, separate them from current ChatGPT product behavior, and check official OpenAI sources for changing features, availability, UI steps, and limits.
 
@@ -36,8 +36,9 @@ If Gemini stops responding (free quota exhausted), perform Claude's reading only
 
 ### Step 1: Framing
 - Ask: "What do you want to extract from this video? [whole project / only part on X]"
-- Ask: "Where do you want to use the result? [Claude Code skill / ChatGPT Skill / ChatGPT prompt or instructions / plugin with connected tools / script / website]"
+- Ask: "Where do you want to use the result? [Claude Code / ChatGPT / Codex / OpenAI API or Agents SDK / Gemini CLI / GitHub Copilot / another platform]"
 - For ChatGPT, distinguish a reusable Skill from Project instructions, account-wide Custom Instructions, and a one-off prompt. Ask which one they want only if the request does not make it clear.
+- For Codex, OpenAI API, Gemini CLI, and GitHub Copilot, use the portable Agent Skills format only after checking the target's current discovery path and capabilities.
 - For videos >20 minutes: Suggest using --start HH:MM:SS --end HH:MM:SS to focus on a segment
 
 ### Step 2: Claude's Local Reading
@@ -90,8 +91,11 @@ If Gemini stops responding (free quota exhausted), perform Claude's reading only
 - For a **ChatGPT Skill**, create a folder with exactly one `SKILL.md` manifest using YAML `name` and `description` front matter. Add references, scripts, or assets only when required. Include a short `INSTALL.md` explaining the current ChatGPT Skills path and account/workspace caveat; verify the path and accepted upload format against official OpenAI documentation before writing it. Offer Create with chat/editor as alternatives. Do not use the OpenAI API unless the user explicitly chose an API integration.
 - For **ChatGPT prompts or instructions**, produce the requested copy-ready text and say whether it is intended for one conversation, one Project, or account-wide Custom Instructions. Check current official documentation for UI labels or text limits before claiming them.
 - For a **ChatGPT plugin**, separate reusable skill instructions from connected apps/MCP tools, authentication, and workspace permissions. Include only integrations the video or user actually requires.
-- Prepare at least three short test prompts for the chosen target: a normal request, an edge case, and a request outside the intended scope. State what a good result should do. Run tests when the target is available; otherwise give the user the prompts and expected behavior to try.
-- Fix issues found during testing and document any requirement that could not be verified.
+- For **Codex**, use the portable skill folder under .agents/skills/<skill-name>/, then provide Codex invocation and reload guidance. Add agents/openai.yaml only when OpenAI-specific display metadata is useful.
+- For **Gemini CLI** and **GitHub Copilot**, use their documented Agent Skills discovery paths and give target-specific install/use steps. Do not assume their available tools match Claude's.
+- For **OpenAI API or Agents SDK**, show how the skill becomes available in the sandbox or API runtime. Treat API keys and runtime configuration as a separate integration that requires the user's explicit request.
+- Prepare three short test prompts for the chosen target: a normal request, an edge case, and a request outside the intended scope. State what a good result should do. Run tests only when the user asks for testing or verification and the target is available; otherwise provide the prompts and expected behavior.
+- Fix issues found during authorized testing and document any requirement that could not be verified.
 
 ## Error Handling
 
@@ -101,12 +105,15 @@ If Gemini stops responding (free quota exhausted), perform Claude's reading only
 - If user doesn't specify scope: Default to asking for clarification rather than assuming
 - If the target is ChatGPT and feature availability, plan eligibility, interface steps, or limits matter: verify them against current official OpenAI Help Center or developer documentation. Do not infer access from a plan name or assume a feature is available in every workspace.
 - If ChatGPT Skills are unavailable to the user, offer a one-off prompt or, if available, Project instructions and explain what capability would be missing.
+- If a selected product cannot load Agent Skills, create that product's native prompt or instruction format instead of claiming the portable folder will work unchanged.
+- If the user requests several platforms, keep one verified specification and generate only the adapters requested. Explain which parts are shared and which require separate tools, credentials, or account features.
 - If current official sources disagree with the video about ChatGPT behavior, label the video claim as historical or unverified instead of silently rewriting the source notes.
 
 ## Output Format
 
 The skill should deliver the artifact that matches the selected target:
 - A Claude Code skill ready for local installation
+- A portable Agent Skill ready for Codex, Gemini CLI, GitHub Copilot, or an OpenAI API/Agents SDK runtime
 - A ChatGPT Skill package ready to upload, if the user's account/workspace supports it
 - A copy-ready ChatGPT prompt or instructions for the requested scope
 - A ChatGPT plugin plan/package when connected tools are explicitly required and supported
@@ -121,6 +128,19 @@ After preparing an artifact from a YouTube tutorial:
 2. Check that it follows the verified findings and handles the edge case and out-of-scope test as intended.
 3. If the user must test it in their own ChatGPT account, provide copy-ready test prompts and expected results; do not claim the upload or account-specific behavior was verified.
 4. Collect user feedback and iterate if needed.
+
+## Agent Platform Adapters
+
+Use one verified video specification, then tailor the output to the target:
+
+- **Claude Code**: keep this skill's local workflow and install under the project's or user's Claude Code skill directory. Use Claude-specific commands only when those skills are present.
+- **Codex**: repository skills are discovered under .agents/skills/. Use the $skill-name invocation and provide any optional OpenAI UI metadata in agents/openai.yaml.
+- **ChatGPT**: distinguish a native Skill from a Project instruction set or one-off prompt. Native Skills depend on account and workspace eligibility. Project instructions apply only within that Project.
+- **OpenAI API / Agents SDK**: use the portable SKILL.md package, but explain how the runtime receives its files. API credentials, MCP connections, and sandbox permissions are separate setup.
+- **Gemini CLI**: it supports Agent Skills and discovers workspace packages from .agents/skills/. Provide current install, link, consent, and activation steps from the official CLI guide.
+- **GitHub Copilot**: use the documented project skill directory and distinguish on-demand skills from repository-wide custom instructions.
+
+When producing several versions, share the verified workflow and specification, but keep each target's installation, metadata, invocation syntax, and tool assumptions specific. The repository guide at docs/platforms/README.md tracks the current supported targets and official documentation.
 
 ## Official ChatGPT References
 

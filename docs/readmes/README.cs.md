@@ -2,12 +2,12 @@
   <img src="https://cdn.simpleicons.org/youtube/FF0000" width="72" alt="YouTube" /> youtube-vers-agent
 </h1>
 
-<p align="center"><strong>Převádějte návody z YouTube na přehledné a ověřené dovednosti pro Claude Code.</strong></p>
+<p align="center"><strong>Převádějte návody z YouTube na přehledné a ověřené dovednosti a pracovní postupy pro více AI agentů.</strong></p>
 
 <p align="center">
   <a href="../../LICENSE"><img src="https://img.shields.io/badge/License-MIT-2ea44f?style=flat" alt="MIT License" /></a>
   <a href="https://github.com/Zero-Piege/youtube-vers-agent/stargazers"><img src="https://img.shields.io/github/stars/Zero-Piege/youtube-vers-agent?style=flat&logo=github" alt="GitHub stars" /></a>
-  <a href="../../.claude/skills/youtube-vers-agent/SKILL.md"><img src="https://img.shields.io/badge/Claude%20Code-skill-cb785c?style=flat&logo=anthropic&logoColor=white" alt="Claude Code skill" /></a>
+  <a href="../../docs/platforms/README.md"><img src="https://img.shields.io/badge/Agent%20Skills-multi--platform-6f42c1?style=flat&logo=github" alt="Multi-platform support" /></a>
 </p>
 
 <p align="center">
@@ -19,6 +19,8 @@
 </p>
 
 ---
+
+Tento repozitář podporuje více agentních platforem. Tato stránka popisuje postup pro Claude Code; přenosné formáty a nastavení pro Codex, Gemini CLI, GitHub Copilot, ChatGPT a OpenAI API najdete v [průvodci platformami](../../docs/platforms/README.md).
 
 Zadejte odkaz na YouTube a cíl. Dovednost nezávisle analyzuje video pomocí Claude a Gemini, spojí zjištění v notes/SPEC.md a vytvoří a ověří znovu použitelnou dovednost pro Claude Code. Gemini je volitelné; bez něj bude výsledek označen jako založený na jediném zdroji.
 
